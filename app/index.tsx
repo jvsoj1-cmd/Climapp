@@ -1,78 +1,88 @@
-import React from 'react';
-import { Modal, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from "expo-router";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+
 export default function HomeScreen() {
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const openModal = () => {
-    setModalVisible(true);
-  }
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  }
+  const router = useRouter();
   return (
-    <View style={styles.container}>
-      {!modalVisible && (
-        <>
-          <Text style={styles.title}>
-            Hello World</Text>
-            <TouchableOpacity
-            style={styles.customButton}
-            onPress={openModal}>
-            <Text style={styles.customButtonText}>Entrar</Text>
-                </TouchableOpacity>
-                <Text>
-                  Plataforma atual: {Platform.OS==='ios' ? 'iOS' : 'Android'}
-                </Text>
-        </>
-      )}
-            <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-          onRequestClose={handleCloseModal}
-          >
-            <View>  
-              <Text> 
-                Isto é um modal
-              </Text>
-              <TouchableOpacity
-                style={styles.customButton}
-                onPress={handleCloseModal}
-              >
-                <Text style={styles.customButtonText}>Fechar</Text>
-              </TouchableOpacity>
-            </View>
+    <LinearGradient
+      colors={['#00457D', '#05051F']}
+      style={styles.container}
+    >
+      <View style={styles.content}>
+        <View style={{ height: 30 }} />
+        <Image
+          source={require('../assets/images/Logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Image
+          source={require('../assets/images/Ilustra1.png')}
+          style={styles.illustration}
+          resizeMode="contain" />
 
-            </Modal>
+        <Text style={styles.title}>
+
+          Boas Vindas!
+
+        </Text>
+
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.7}
+        >
+          <View style={styles.buttonContent}>
+            <Text style={styles.buttonText}>Entrar</Text>
+          </View>
+        </TouchableOpacity>
+
       </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-    customButton: {
-        backgroundColor: '#2196F3',
-        paddingVertical: 12,
-        paddingHorizontal: 30,
-        borderRadius: 8,
-        marginTop: 10,
-    },
-    customButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '600',
-    },
   container: {
+    flex: 1, // Preenche a tela toda
+  },
+  content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#f5f5f5',
+    padding: 16,
+    alignItems: 'center', // Centraliza os itens no eixo X (cruzeiro)
+    justifyContent: 'center', // Centraliza no eixo Y (principal)
+    gap: 40, // Espaçamento entre os elementos 
+  },
+  logo: {
+    width: 150,
+    height: 50, // Importante: Imagens locais no RN precisam de altura definida
+  },
+  illustration: {
+    height: 200,
+    width: '100%',
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
+    color: '#FFFFFF',
+    fontSize: 26,
+    fontFamily: 'Montserrat_400Regular',
   },
-
+  button: {
+    backgroundColor: '#7693ff',
+    paddingVertical: 12,
+    paddingHorizontal: 28,
+    borderRadius: 8,
+    width: '100%', // O botão ocupa a largura disponível
+  },
+  buttonContent: {
+    flexDirection: 'row', // Comportamento de Row
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  buttonText: {
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '600',
+    fontFamily: 'Montserrat_600SemiBold',
+  }
 });
