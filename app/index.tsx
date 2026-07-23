@@ -1,10 +1,11 @@
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
+
   return (
     <LinearGradient
       colors={['#00457D', '#05051F']}
@@ -18,26 +19,26 @@ export default function HomeScreen() {
           resizeMode="contain"
         />
         <Image
-          source={require('../assets/images/Ilustra1.png')}
+          source={require('../assets/images/Ilustra.png')}
           style={styles.illustration}
-          resizeMode="contain" />
+          resizeMode='contain' />
 
         <Text style={styles.title}>
-
-          Boas Vindas!
-
+          Boas-vindas!
         </Text>
 
         <TouchableOpacity
           style={styles.button}
-          activeOpacity={0.7}
-        >
+          activeOpacity={0.8}
+          onPress={() => router.push('../screens/ListCity')}>
           <View style={styles.buttonContent}>
             <Text style={styles.buttonText}>Entrar</Text>
+            <MaterialIcons name='arrow-forward' size={25} color="black" />
           </View>
         </TouchableOpacity>
 
       </View>
+
     </LinearGradient>
   );
 }
